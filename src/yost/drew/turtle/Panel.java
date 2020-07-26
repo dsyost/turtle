@@ -13,12 +13,14 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-public class Panel extends JPanel{
+public class Panel extends JPanel implements Runnable{
 	
-	ArrayList<ArrayList<Line>> path;
-	int[] drawTo = {0,0};
-	Image turtle;
-	int lineThickness = 1;
+	private ArrayList<ArrayList<Line>> path;
+	private int[] drawTo = {0,0};
+	private Image turtle;
+	private int lineThickness = 1;
+	private boolean running = false;
+	private int delay = 100;
 	
 	public Panel(int width, int height, Color color) {
 		this.setBackground(color);
@@ -72,14 +74,27 @@ public class Panel extends JPanel{
 	}
 	
 	//still needs work
+	@Override
 	public void run() {
-		for(int i=0; i<path.size();i++) {
+		running = true;
+		for(int i=0; i<path.size() && running;i++) {
 			drawTo[0]=i;
-			drawTo[1]=path.get(i).size();
-			repaint();
+			for(int j=0; j<path.get(i).size()+1;j++) {
+				drawTo[1]=j;
+				repaint();
+				try {
+					Thread.sleep(delay);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	}
-
+	
+	public void stop() {
+		running = false;
+	}
+	
 	public void reset() {
 		drawTo[0] = 0;
 		drawTo[1] = 0;
@@ -88,6 +103,10 @@ public class Panel extends JPanel{
 
 	public void setThickness(int t) {
 		lineThickness = t;
+	}
+
+	public void changeDelay(int value) {
+		delay = value;
 	}
 
 }
