@@ -44,6 +44,10 @@ public class Turtle {
 		return y;
 	}
 
+	public void setThickness(int t) {
+		panel.setThickness(t);
+	}
+	
 	public void forgetPath() {
 		panel.addClear();
 	}

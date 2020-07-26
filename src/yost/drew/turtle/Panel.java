@@ -18,6 +18,7 @@ public class Panel extends JPanel{
 	ArrayList<ArrayList<Line>> path;
 	int[] drawTo = {0,0};
 	Image turtle;
+	int lineThickness = 1;
 	
 	public Panel(int width, int height, Color color) {
 		this.setBackground(color);
@@ -41,7 +42,7 @@ public class Panel extends JPanel{
 	
 	private void drawLines(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		g2.setStroke(new BasicStroke(3));
+		g2.setStroke(new BasicStroke(lineThickness));
 		for(int i=0;i<drawTo[1];i++) {
 			Line line = path.get(drawTo[0]).get(i);
 			g2.setColor(line.color);
@@ -83,6 +84,10 @@ public class Panel extends JPanel{
 		drawTo[0] = 0;
 		drawTo[1] = 0;
 		repaint();
+	}
+
+	public void setThickness(int t) {
+		lineThickness = t;
 	}
 
 }
