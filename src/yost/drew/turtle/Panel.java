@@ -1,5 +1,6 @@
 package yost.drew.turtle;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -25,6 +26,7 @@ public class Panel extends JPanel{
 	
 	private void drawLines(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
+		g2.setStroke(new BasicStroke(3));
 		for(Line line : lines) {
 			g2.setColor(line.color);
 			g2.drawLine(line.x1, line.y1, line.x2, line.y2);
