@@ -11,8 +11,8 @@ public class Turtle {
 	
 	
 	public Turtle(Panel p) {
-		x = 300;
-		y = 200;
+		x = p.getWidth()/2;
+		y = p.getHeight()/2;
 		panel = p;
 	}
 
@@ -28,16 +28,23 @@ public class Turtle {
 		return penDown;
 	}
 	
-	public void forgetPath() {
-		panel.clear();
-	}
-	
 	public void moveTo(int nx, int ny) {
 		if(penDown) {
 			panel.addLine(new Line(x,y,nx,ny,color));
-			panel.repaint();
 		}
 		x = nx;
 		y = ny;
+	}
+
+	public int getX() {
+		return x;
+	}
+	
+	public int getY() {
+		return y;
+	}
+
+	public void forgetPath() {
+		panel.addClear();
 	}
 }
