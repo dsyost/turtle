@@ -28,7 +28,7 @@ public class Window extends JFrame {
 		reset.setBounds(0,500,200,60);
 		reset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(runThread.isAlive()) {
+				if(runThread != null && runThread.isAlive()) {
 					p.stop();
 				}
 				p.reset();
